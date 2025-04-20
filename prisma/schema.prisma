@@ -32,7 +32,7 @@ model Admin {
   id String @id @default(uuid())
   name String
   email String @unique
-  profilePhone String?
+  profilePhoto String?
   contactNumber String
   isDeleted Boolean @default(false)
   createdAt DateTime @default(now())

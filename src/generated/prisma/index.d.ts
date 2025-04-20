@@ -2107,7 +2107,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
-    profilePhone: string | null
+    profilePhoto: string | null
     contactNumber: string | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -2118,7 +2118,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
-    profilePhone: string | null
+    profilePhoto: string | null
     contactNumber: string | null
     isDeleted: boolean | null
     createdAt: Date | null
@@ -2129,7 +2129,7 @@ export namespace Prisma {
     id: number
     name: number
     email: number
-    profilePhone: number
+    profilePhoto: number
     contactNumber: number
     isDeleted: number
     createdAt: number
@@ -2142,7 +2142,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    profilePhone?: true
+    profilePhoto?: true
     contactNumber?: true
     isDeleted?: true
     createdAt?: true
@@ -2153,7 +2153,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    profilePhone?: true
+    profilePhoto?: true
     contactNumber?: true
     isDeleted?: true
     createdAt?: true
@@ -2164,7 +2164,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
-    profilePhone?: true
+    profilePhoto?: true
     contactNumber?: true
     isDeleted?: true
     createdAt?: true
@@ -2248,7 +2248,7 @@ export namespace Prisma {
     id: string
     name: string
     email: string
-    profilePhone: string | null
+    profilePhoto: string | null
     contactNumber: string
     isDeleted: boolean
     createdAt: Date
@@ -2276,7 +2276,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    profilePhone?: boolean
+    profilePhoto?: boolean
     contactNumber?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -2288,7 +2288,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    profilePhone?: boolean
+    profilePhoto?: boolean
     contactNumber?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -2300,7 +2300,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    profilePhone?: boolean
+    profilePhoto?: boolean
     contactNumber?: boolean
     isDeleted?: boolean
     createdAt?: boolean
@@ -2312,14 +2312,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
-    profilePhone?: boolean
+    profilePhoto?: boolean
     contactNumber?: boolean
     isDeleted?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "profilePhone" | "contactNumber" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
+  export type AdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "profilePhoto" | "contactNumber" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["admin"]>
   export type AdminInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2339,7 +2339,7 @@ export namespace Prisma {
       id: string
       name: string
       email: string
-      profilePhone: string | null
+      profilePhoto: string | null
       contactNumber: string
       isDeleted: boolean
       createdAt: Date
@@ -2771,7 +2771,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Admin", 'String'>
     readonly name: FieldRef<"Admin", 'String'>
     readonly email: FieldRef<"Admin", 'String'>
-    readonly profilePhone: FieldRef<"Admin", 'String'>
+    readonly profilePhoto: FieldRef<"Admin", 'String'>
     readonly contactNumber: FieldRef<"Admin", 'String'>
     readonly isDeleted: FieldRef<"Admin", 'Boolean'>
     readonly createdAt: FieldRef<"Admin", 'DateTime'>
@@ -3222,7 +3222,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
-    profilePhone: 'profilePhone',
+    profilePhoto: 'profilePhoto',
     contactNumber: 'contactNumber',
     isDeleted: 'isDeleted',
     createdAt: 'createdAt',
@@ -3418,7 +3418,7 @@ export namespace Prisma {
     id?: StringFilter<"Admin"> | string
     name?: StringFilter<"Admin"> | string
     email?: StringFilter<"Admin"> | string
-    profilePhone?: StringNullableFilter<"Admin"> | string | null
+    profilePhoto?: StringNullableFilter<"Admin"> | string | null
     contactNumber?: StringFilter<"Admin"> | string
     isDeleted?: BoolFilter<"Admin"> | boolean
     createdAt?: DateTimeFilter<"Admin"> | Date | string
@@ -3430,7 +3430,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    profilePhone?: SortOrderInput | SortOrder
+    profilePhoto?: SortOrderInput | SortOrder
     contactNumber?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -3445,7 +3445,7 @@ export namespace Prisma {
     OR?: AdminWhereInput[]
     NOT?: AdminWhereInput | AdminWhereInput[]
     name?: StringFilter<"Admin"> | string
-    profilePhone?: StringNullableFilter<"Admin"> | string | null
+    profilePhoto?: StringNullableFilter<"Admin"> | string | null
     contactNumber?: StringFilter<"Admin"> | string
     isDeleted?: BoolFilter<"Admin"> | boolean
     createdAt?: DateTimeFilter<"Admin"> | Date | string
@@ -3457,7 +3457,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    profilePhone?: SortOrderInput | SortOrder
+    profilePhoto?: SortOrderInput | SortOrder
     contactNumber?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -3474,7 +3474,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Admin"> | string
     name?: StringWithAggregatesFilter<"Admin"> | string
     email?: StringWithAggregatesFilter<"Admin"> | string
-    profilePhone?: StringNullableWithAggregatesFilter<"Admin"> | string | null
+    profilePhoto?: StringNullableWithAggregatesFilter<"Admin"> | string | null
     contactNumber?: StringWithAggregatesFilter<"Admin"> | string
     isDeleted?: BoolWithAggregatesFilter<"Admin"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Admin"> | Date | string
@@ -3565,7 +3565,7 @@ export namespace Prisma {
   export type AdminCreateInput = {
     id?: string
     name: string
-    profilePhone?: string | null
+    profilePhoto?: string | null
     contactNumber: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -3577,7 +3577,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
-    profilePhone?: string | null
+    profilePhoto?: string | null
     contactNumber: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -3587,7 +3587,7 @@ export namespace Prisma {
   export type AdminUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3599,7 +3599,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3610,7 +3610,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
-    profilePhone?: string | null
+    profilePhoto?: string | null
     contactNumber: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -3620,7 +3620,7 @@ export namespace Prisma {
   export type AdminUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3631,7 +3631,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -3810,7 +3810,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    profilePhone?: SortOrder
+    profilePhoto?: SortOrder
     contactNumber?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -3821,7 +3821,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    profilePhone?: SortOrder
+    profilePhoto?: SortOrder
     contactNumber?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -3832,7 +3832,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
-    profilePhone?: SortOrder
+    profilePhoto?: SortOrder
     contactNumber?: SortOrder
     isDeleted?: SortOrder
     createdAt?: SortOrder
@@ -4086,7 +4086,7 @@ export namespace Prisma {
   export type AdminCreateWithoutUserInput = {
     id?: string
     name: string
-    profilePhone?: string | null
+    profilePhoto?: string | null
     contactNumber: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -4096,7 +4096,7 @@ export namespace Prisma {
   export type AdminUncheckedCreateWithoutUserInput = {
     id?: string
     name: string
-    profilePhone?: string | null
+    profilePhoto?: string | null
     contactNumber: string
     isDeleted?: boolean
     createdAt?: Date | string
@@ -4122,7 +4122,7 @@ export namespace Prisma {
   export type AdminUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -4132,7 +4132,7 @@ export namespace Prisma {
   export type AdminUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
-    profilePhone?: NullableStringFieldUpdateOperationsInput | string | null
+    profilePhoto?: NullableStringFieldUpdateOperationsInput | string | null
     contactNumber?: StringFieldUpdateOperationsInput | string
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
