@@ -14,7 +14,7 @@ const getAllAdmins = async (req: Request, res: Response) => {
       message: "Admin retrieved successfully",
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: error?.name || "Something went wrong",
