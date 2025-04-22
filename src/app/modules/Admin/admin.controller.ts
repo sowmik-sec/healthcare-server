@@ -4,16 +4,7 @@ import pick from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constants";
 import sendResponse from "../../../shared/sendResponse";
 import { StatusCodes } from "http-status-codes";
-
-const catchAsync = (fn: RequestHandler) => {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await fn(req, res, next);
-    } catch (err) {
-      next(err);
-    }
-  };
-};
+import catchAsync from "../../../shared/catchAsync";
 
 const getAllAdmins: RequestHandler = catchAsync(async (req, res) => {
   const filters = pick(req.query, adminFilterableFields);
