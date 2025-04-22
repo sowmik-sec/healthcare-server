@@ -19,6 +19,7 @@ const getAllAdmins = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: error?.name || "Something went wrong",
+      error,
     });
   }
 };
@@ -35,6 +36,7 @@ const getAdminById = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: error?.name || "Something went wrong",
+      error,
     });
   }
 };
@@ -53,6 +55,7 @@ const updateAdmin = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: error?.name || "Something went wrong",
+      error,
     });
   }
 };
@@ -68,6 +71,23 @@ const deleteAdmin = async (req: Request, res: Response) => {
     res.status(500).json({
       success: false,
       message: error?.name || "Something went wrong",
+      error,
+    });
+  }
+};
+const softDeleteAdmin = async (req: Request, res: Response) => {
+  try {
+    const result = await AdminServices.softDeleteAdminIntoDB(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: "Admin deleted successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.name || "Something went wrong",
+      error,
     });
   }
 };
@@ -77,4 +97,5 @@ export const AdminControllers = {
   getAdminById,
   updateAdmin,
   deleteAdmin,
+  softDeleteAdmin,
 };
