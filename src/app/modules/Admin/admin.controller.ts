@@ -23,6 +23,23 @@ const getAllAdmins = async (req: Request, res: Response) => {
   }
 };
 
+const getAdminById = async (req: Request, res: Response) => {
+  try {
+    const result = await AdminServices.getAdminByIdFromDB(req.params.id);
+    res.status(200).json({
+      success: true,
+      message: "Admin retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.name || "Something went wrong",
+    });
+  }
+};
+
 export const AdminControllers = {
   getAllAdmins,
+  getAdminById,
 };
