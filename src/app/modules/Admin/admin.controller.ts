@@ -3,6 +3,7 @@ import { AdminServices } from "./admin.service";
 import pick from "../../../shared/pick";
 import { adminFilterableFields } from "./admin.constants";
 import sendResponse from "../../../shared/sendResponse";
+import { StatusCodes } from "http-status-codes";
 
 const getAllAdmins = async (req: Request, res: Response) => {
   try {
@@ -17,9 +18,9 @@ const getAllAdmins = async (req: Request, res: Response) => {
     //   data: result.data,
     // });
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: StatusCodes.OK,
       success: true,
-      message: "Admin Created Successfully",
+      message: "Admin retrieved Successfully",
       meta: result.meta,
       data: result.data,
     });
@@ -41,7 +42,7 @@ const getAdminById = async (req: Request, res: Response) => {
     //   data: result,
     // });
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: StatusCodes.OK,
       success: true,
       message: "Admin retrieved Successfully",
       data: result,
@@ -66,7 +67,7 @@ const updateAdmin = async (req: Request, res: Response) => {
     //   data: result,
     // });
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: StatusCodes.OK,
       success: true,
       message: "Admin updated successfully",
       data: result,
@@ -88,7 +89,7 @@ const deleteAdmin = async (req: Request, res: Response) => {
     //   data: result,
     // });
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: StatusCodes.OK,
       success: true,
       message: "Admin deleted Successfully",
       data: result,
@@ -110,7 +111,7 @@ const softDeleteAdmin = async (req: Request, res: Response) => {
     //   data: result,
     // });
     sendResponse(res, {
-      statusCode: 200,
+      statusCode: StatusCodes.OK,
       success: true,
       message: "Admin deleted Successfully",
       data: result,
