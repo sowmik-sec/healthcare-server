@@ -3,7 +3,6 @@ import { UserService } from "./user.service";
 
 const createAdmin = async (req: Request, res: Response) => {
   try {
-    console.log("File: ", req.file, "Data", req.body.data);
     const result = await UserService.createAdmin(req);
     res.status(200).json({
       success: true,
