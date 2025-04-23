@@ -1,6 +1,7 @@
 import multer from "multer";
 import path from "path";
 import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
 
 cloudinary.config({
   cloud_name: "dfllcpvi5",
@@ -29,6 +30,7 @@ const uploadToCloudinary = async (file: any) => {
         console.log(error);
         reject(error);
       });
+    fs.unlinkSync(file.path);
     resolve(uploadResult);
   });
 };
