@@ -107,6 +107,7 @@ const forgetPassword = async (payload: any) => {
       status: UserStatus.ACTIVE,
     },
   });
+  console.log({ userData });
   const resetPasswordToken = jwtHelpers.generateToken(
     {
       email: userData.email,
@@ -115,7 +116,11 @@ const forgetPassword = async (payload: any) => {
     config.jwt.reset_password_token as Secret,
     config.jwt.reset_password_expires_in as string
   );
-  console.log(resetPasswordToken);
+  // http://localhost:3000/reset-pass?userId=id&token=hxwoxfdsh
+  const resetPassLink =
+    config.reset_pass_link +
+    `?userId=${userData.id}&token=${resetPasswordToken}`;
+  console.log(resetPassLink);
 };
 
 export const AuthServices = {
