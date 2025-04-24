@@ -62,8 +62,38 @@ const createDoctor = async (req: any) => {
   });
   return result;
 };
+const createPatient = async (req: any) => {
+  const file: IFile = req.file;
+
+  // console.log(req.body);
+
+  if (file) {
+    const uploadToCloudinary = await fileUploader.uploadToCloudinary(file);
+    // console.log("Uploaded ", uploadToCloudinary);
+    req.body.patient.profilePhoto = uploadToCloudinary?.secure_url;
+    // console.log(req.body);
+  }
+
+  const hashedPassword: string = await bcrypt.hash(req.body.password, 12);
+  const userData = {
+    email: req.body.patient.email,
+    password: hashedPassword,
+    role: UserRole.PATIENT,
+  };
+  const result = await prisma.$transaction(async (transactionClient) => {
+    await transactionClient.user.create({
+      data: userData,
+    });
+    const createdPatientData = await transactionClient.patient.create({
+      data: req.body.patient,
+    });
+    return createdPatientData;
+  });
+  return result;
+};
 
 export const UserService = {
   createAdmin,
   createDoctor,
+  createPatient,
 };
