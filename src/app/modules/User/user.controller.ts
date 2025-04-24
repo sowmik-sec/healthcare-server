@@ -1,9 +1,14 @@
-import { Request, Response } from "express";
-import { UserService } from "./user.service";
+import { Request, RequestHandler, Response } from "express";
+import catchAsync from "../../../shared/catchAsync";
+import pick from "../../../shared/pick";
+import { userFilterableFields } from "./user.constant";
+import { UserServices } from "./user.service";
+import { StatusCodes } from "http-status-codes";
+import sendResponse from "../../../shared/sendResponse";
 
 const createAdmin = async (req: Request, res: Response) => {
   try {
-    const result = await UserService.createAdmin(req);
+    const result = await UserServices.createAdmin(req);
     res.status(200).json({
       success: true,
       message: "Admin created successfully",
@@ -18,7 +23,7 @@ const createAdmin = async (req: Request, res: Response) => {
 };
 const createDoctor = async (req: Request, res: Response) => {
   try {
-    const result = await UserService.createDoctor(req);
+    const result = await UserServices.createDoctor(req);
     res.status(200).json({
       success: true,
       message: "Doctor created successfully",
@@ -33,7 +38,7 @@ const createDoctor = async (req: Request, res: Response) => {
 };
 const createPatient = async (req: Request, res: Response) => {
   try {
-    const result = await UserService.createPatient(req);
+    const result = await UserServices.createPatient(req);
     res.status(200).json({
       success: true,
       message: "Patient created successfully",
@@ -47,8 +52,29 @@ const createPatient = async (req: Request, res: Response) => {
   }
 };
 
-export const UserController = {
+const getAllAdmins = catchAsync(async (req, res) => {
+  const filters = pick(req.query, userFilterableFields);
+  const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
+  const result = await UserServices.getAllAdminsFromDB(filters, options);
+  // res.status(200).json({
+  //   success: true,
+  //   message: "Admin retrieved successfully",
+  //   meta: result.meta,
+  //   data: result.data,
+  // });
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Users retrieved Successfully",
+    meta: result.meta,
+    data: result.data,
+  });
+});
+
+export const UserControllers = {
   createAdmin,
   createDoctor,
   createPatient,
+  getAllAdmins,
 };
