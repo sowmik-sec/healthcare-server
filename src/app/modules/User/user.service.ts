@@ -2,9 +2,10 @@ import { UserRole } from "../../../generated/prisma";
 import bcrypt from "bcrypt";
 import prisma from "../../../shared/prisma";
 import { fileUploader } from "../../../helpers/fileUploader";
+import { IFile } from "../../interfaces/file";
 
 const createAdmin = async (req: any) => {
-  const file = req.file;
+  const file: IFile = req.file;
 
   // console.log(req.body);
 
