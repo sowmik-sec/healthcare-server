@@ -149,6 +149,7 @@ exports.Prisma.DoctorScalarFieldEnum = {
   registrationNumber: 'registrationNumber',
   experience: 'experience',
   gender: 'gender',
+  designation: 'designation',
   appointmentFee: 'appointmentFee',
   qualification: 'qualification',
   currentWorkingPlace: 'currentWorkingPlace',

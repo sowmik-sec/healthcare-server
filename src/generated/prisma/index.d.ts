@@ -3349,6 +3349,7 @@ export namespace Prisma {
     registrationNumber: string | null
     experience: number | null
     gender: $Enums.Gender | null
+    designation: string | null
     appointmentFee: number | null
     qualification: string | null
     currentWorkingPlace: string | null
@@ -3367,6 +3368,7 @@ export namespace Prisma {
     registrationNumber: string | null
     experience: number | null
     gender: $Enums.Gender | null
+    designation: string | null
     appointmentFee: number | null
     qualification: string | null
     currentWorkingPlace: string | null
@@ -3385,6 +3387,7 @@ export namespace Prisma {
     registrationNumber: number
     experience: number
     gender: number
+    designation: number
     appointmentFee: number
     qualification: number
     currentWorkingPlace: number
@@ -3415,6 +3418,7 @@ export namespace Prisma {
     registrationNumber?: true
     experience?: true
     gender?: true
+    designation?: true
     appointmentFee?: true
     qualification?: true
     currentWorkingPlace?: true
@@ -3433,6 +3437,7 @@ export namespace Prisma {
     registrationNumber?: true
     experience?: true
     gender?: true
+    designation?: true
     appointmentFee?: true
     qualification?: true
     currentWorkingPlace?: true
@@ -3451,6 +3456,7 @@ export namespace Prisma {
     registrationNumber?: true
     experience?: true
     gender?: true
+    designation?: true
     appointmentFee?: true
     qualification?: true
     currentWorkingPlace?: true
@@ -3556,6 +3562,7 @@ export namespace Prisma {
     registrationNumber: string
     experience: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -3593,6 +3600,7 @@ export namespace Prisma {
     registrationNumber?: boolean
     experience?: boolean
     gender?: boolean
+    designation?: boolean
     appointmentFee?: boolean
     qualification?: boolean
     currentWorkingPlace?: boolean
@@ -3612,6 +3620,7 @@ export namespace Prisma {
     registrationNumber?: boolean
     experience?: boolean
     gender?: boolean
+    designation?: boolean
     appointmentFee?: boolean
     qualification?: boolean
     currentWorkingPlace?: boolean
@@ -3631,6 +3640,7 @@ export namespace Prisma {
     registrationNumber?: boolean
     experience?: boolean
     gender?: boolean
+    designation?: boolean
     appointmentFee?: boolean
     qualification?: boolean
     currentWorkingPlace?: boolean
@@ -3650,6 +3660,7 @@ export namespace Prisma {
     registrationNumber?: boolean
     experience?: boolean
     gender?: boolean
+    designation?: boolean
     appointmentFee?: boolean
     qualification?: boolean
     currentWorkingPlace?: boolean
@@ -3658,7 +3669,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type DoctorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "profilePhoto" | "contactNumber" | "address" | "registrationNumber" | "experience" | "gender" | "appointmentFee" | "qualification" | "currentWorkingPlace" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["doctor"]>
+  export type DoctorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "profilePhoto" | "contactNumber" | "address" | "registrationNumber" | "experience" | "gender" | "designation" | "appointmentFee" | "qualification" | "currentWorkingPlace" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["doctor"]>
   export type DoctorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3684,6 +3695,7 @@ export namespace Prisma {
       registrationNumber: string
       experience: number
       gender: $Enums.Gender
+      designation: string
       appointmentFee: number
       qualification: string
       currentWorkingPlace: string
@@ -4123,6 +4135,7 @@ export namespace Prisma {
     readonly registrationNumber: FieldRef<"Doctor", 'String'>
     readonly experience: FieldRef<"Doctor", 'Int'>
     readonly gender: FieldRef<"Doctor", 'Gender'>
+    readonly designation: FieldRef<"Doctor", 'String'>
     readonly appointmentFee: FieldRef<"Doctor", 'Int'>
     readonly qualification: FieldRef<"Doctor", 'String'>
     readonly currentWorkingPlace: FieldRef<"Doctor", 'String'>
@@ -4595,6 +4608,7 @@ export namespace Prisma {
     registrationNumber: 'registrationNumber',
     experience: 'experience',
     gender: 'gender',
+    designation: 'designation',
     appointmentFee: 'appointmentFee',
     qualification: 'qualification',
     currentWorkingPlace: 'currentWorkingPlace',
@@ -4899,6 +4913,7 @@ export namespace Prisma {
     registrationNumber?: StringFilter<"Doctor"> | string
     experience?: IntFilter<"Doctor"> | number
     gender?: EnumGenderFilter<"Doctor"> | $Enums.Gender
+    designation?: StringFilter<"Doctor"> | string
     appointmentFee?: IntFilter<"Doctor"> | number
     qualification?: StringFilter<"Doctor"> | string
     currentWorkingPlace?: StringFilter<"Doctor"> | string
@@ -4918,6 +4933,7 @@ export namespace Prisma {
     registrationNumber?: SortOrder
     experience?: SortOrder
     gender?: SortOrder
+    designation?: SortOrder
     appointmentFee?: SortOrder
     qualification?: SortOrder
     currentWorkingPlace?: SortOrder
@@ -4940,6 +4956,7 @@ export namespace Prisma {
     registrationNumber?: StringFilter<"Doctor"> | string
     experience?: IntFilter<"Doctor"> | number
     gender?: EnumGenderFilter<"Doctor"> | $Enums.Gender
+    designation?: StringFilter<"Doctor"> | string
     appointmentFee?: IntFilter<"Doctor"> | number
     qualification?: StringFilter<"Doctor"> | string
     currentWorkingPlace?: StringFilter<"Doctor"> | string
@@ -4959,6 +4976,7 @@ export namespace Prisma {
     registrationNumber?: SortOrder
     experience?: SortOrder
     gender?: SortOrder
+    designation?: SortOrder
     appointmentFee?: SortOrder
     qualification?: SortOrder
     currentWorkingPlace?: SortOrder
@@ -4985,6 +5003,7 @@ export namespace Prisma {
     registrationNumber?: StringWithAggregatesFilter<"Doctor"> | string
     experience?: IntWithAggregatesFilter<"Doctor"> | number
     gender?: EnumGenderWithAggregatesFilter<"Doctor"> | $Enums.Gender
+    designation?: StringWithAggregatesFilter<"Doctor"> | string
     appointmentFee?: IntWithAggregatesFilter<"Doctor"> | number
     qualification?: StringWithAggregatesFilter<"Doctor"> | string
     currentWorkingPlace?: StringWithAggregatesFilter<"Doctor"> | string
@@ -5163,6 +5182,7 @@ export namespace Prisma {
     registrationNumber: string
     experience?: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -5182,6 +5202,7 @@ export namespace Prisma {
     registrationNumber: string
     experience?: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -5199,6 +5220,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
@@ -5218,6 +5240,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
@@ -5236,6 +5259,7 @@ export namespace Prisma {
     registrationNumber: string
     experience?: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -5253,6 +5277,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
@@ -5271,6 +5296,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
@@ -5531,6 +5557,7 @@ export namespace Prisma {
     registrationNumber?: SortOrder
     experience?: SortOrder
     gender?: SortOrder
+    designation?: SortOrder
     appointmentFee?: SortOrder
     qualification?: SortOrder
     currentWorkingPlace?: SortOrder
@@ -5554,6 +5581,7 @@ export namespace Prisma {
     registrationNumber?: SortOrder
     experience?: SortOrder
     gender?: SortOrder
+    designation?: SortOrder
     appointmentFee?: SortOrder
     qualification?: SortOrder
     currentWorkingPlace?: SortOrder
@@ -5572,6 +5600,7 @@ export namespace Prisma {
     registrationNumber?: SortOrder
     experience?: SortOrder
     gender?: SortOrder
+    designation?: SortOrder
     appointmentFee?: SortOrder
     qualification?: SortOrder
     currentWorkingPlace?: SortOrder
@@ -5973,6 +6002,7 @@ export namespace Prisma {
     registrationNumber: string
     experience?: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -5990,6 +6020,7 @@ export namespace Prisma {
     registrationNumber: string
     experience?: number
     gender: $Enums.Gender
+    designation: string
     appointmentFee: number
     qualification: string
     currentWorkingPlace: string
@@ -6054,6 +6085,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
@@ -6071,6 +6103,7 @@ export namespace Prisma {
     registrationNumber?: StringFieldUpdateOperationsInput | string
     experience?: IntFieldUpdateOperationsInput | number
     gender?: EnumGenderFieldUpdateOperationsInput | $Enums.Gender
+    designation?: StringFieldUpdateOperationsInput | string
     appointmentFee?: IntFieldUpdateOperationsInput | number
     qualification?: StringFieldUpdateOperationsInput | string
     currentWorkingPlace?: StringFieldUpdateOperationsInput | string
