@@ -168,9 +168,25 @@ const getAllAdminsFromDB = async (params: any, options: TPaginationOptions) => {
   };
 };
 
+const changeProfileStatusIntoDB = async (id: string, status: UserRole) => {
+  const userData = await prisma.user.findUniqueOrThrow({
+    where: {
+      id,
+    },
+  });
+  const updateUserStatus = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: status,
+  });
+  return updateUserStatus;
+};
+
 export const UserServices = {
   createAdmin,
   createDoctor,
   createPatient,
   getAllAdminsFromDB,
+  changeProfileStatusIntoDB,
 };

@@ -72,9 +72,29 @@ const getAllAdmins = catchAsync(async (req, res) => {
   });
 });
 
+const changeProfileStatus = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.changeProfileStatusIntoDB(
+      req.params.id,
+      req.body
+    );
+    res.status(200).json({
+      success: true,
+      message: "Status changed successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.name || "Something went wrong",
+    });
+  }
+};
+
 export const UserControllers = {
   createAdmin,
   createDoctor,
   createPatient,
   getAllAdmins,
+  changeProfileStatus,
 };
