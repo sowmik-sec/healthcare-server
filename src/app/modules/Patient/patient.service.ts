@@ -1,17 +1,28 @@
 import prisma from "../../../shared/prisma";
 
 const updatePatientIntoDB = async (id: string, payload: any) => {
-  const result = await prisma.patient.update({
+  const { patientHealthData, medicalReport, ...patientData } = payload;
+  console.log(patientHealthData, medicalReport);
+  const patientInfo = await prisma.patient.findUniqueOrThrow({
     where: {
       id,
     },
-    data: payload,
-    include: {
-      patientHealthData: true,
-      medicalReport: true,
-    },
   });
-  return result;
+  const result = await prisma.$transaction(async (transactionClient) => {
+    // update patient data
+    const updatedPatient = await prisma.patient.update({
+      where: {
+        id,
+      },
+      data: payload,
+      include: {
+        patientHealthData: true,
+        medicalReport: true,
+      },
+    });
+  });
+
+  // return result;
 };
 
 export const PatientServices = {
