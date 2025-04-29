@@ -1,6 +1,11 @@
+import { Patient } from "../../../generated/prisma";
 import prisma from "../../../shared/prisma";
+import { IPatientUpdate } from "./patient.interface";
 
-const updatePatientIntoDB = async (id: string, payload: any) => {
+const updatePatientIntoDB = async (
+  id: string,
+  payload: Partial<IPatientUpdate>
+): Promise<Patient | null> => {
   const { patientHealthData, medicalReport, ...patientData } = payload;
   console.log(patientHealthData, medicalReport);
   const patientInfo = await prisma.patient.findUniqueOrThrow({
