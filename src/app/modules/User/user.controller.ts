@@ -91,10 +91,28 @@ const changeProfileStatus = async (req: Request, res: Response) => {
   }
 };
 
+const getMyProfile = async (req: Request, res: Response) => {
+  try {
+    const user = req.user;
+    const result = await UserServices.getMyProfile(user);
+    res.status(200).json({
+      success: true,
+      message: "My profile retrieved successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.name || "Something went wrong",
+    });
+  }
+};
+
 export const UserControllers = {
   createAdmin,
   createDoctor,
   createPatient,
   getAllAdmins,
   changeProfileStatus,
+  getMyProfile,
 };

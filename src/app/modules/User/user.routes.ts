@@ -14,6 +14,11 @@ router.get(
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
   UserControllers.getAllAdmins
 );
+router.get(
+  "/me",
+  auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.DOCTOR, UserRole.PATIENT),
+  UserControllers.getMyProfile
+);
 
 router.post(
   "/create-admin",
