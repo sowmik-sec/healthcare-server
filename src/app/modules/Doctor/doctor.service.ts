@@ -16,16 +16,39 @@ const updateDoctorIntoDB = async (id: string, payload: any) => {
         id,
       },
       data: doctorData,
+      include: {
+        doctorSpecialties: true,
+      },
     });
-    for (const specialtiesId of specialties) {
-      const createDoctorSpecialties =
-        await transactionClient.doctorSpecialties.create({
-          data: {
-            doctorId: doctorInfo.id,
-            specialtiesId: specialtiesId,
-          },
-        });
+    if (specialties && specialties.length > 0) {
+      // delete specialties
+      const deleteSpecialtiesIds = specialties.filter(
+        (specialty) => specialty.isDeleted
+      );
+      for (const specialty of deleteSpecialtiesIds) {
+        const createDoctorSpecialties =
+          await transactionClient.doctorSpecialties.deleteMany({
+            where: {
+              doctorId: doctorInfo.id,
+              specialtiesId: specialty.specialtiesId,
+            },
+          });
+      }
+      // create specialties
+      const createSpecialtiesIds = specialties.filter(
+        (specialty) => !specialty.isDeleted
+      );
+      for (const specialty of createSpecialtiesIds) {
+        const createDoctorSpecialties =
+          await transactionClient.doctorSpecialties.create({
+            data: {
+              doctorId: doctorInfo.id,
+              specialtiesId: specialty.specialtiesId,
+            },
+          });
+      }
     }
+
     return updatedDoctorData;
   });
   return result;
