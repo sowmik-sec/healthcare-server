@@ -10,7 +10,7 @@ const updatePatientIntoDB = async (id: string, payload: any) => {
   });
   const result = await prisma.$transaction(async (transactionClient) => {
     // update patient data
-    const updatedPatient = await prisma.patient.update({
+    const updatedPatient = await transactionClient.patient.update({
       where: {
         id,
       },
