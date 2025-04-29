@@ -110,7 +110,7 @@ const getMyProfile = async (req: Request, res: Response) => {
 const updateMyProfile = async (req: Request, res: Response) => {
   try {
     const user = req.user;
-    const result = await UserServices.updateMyProfile(user, req.body);
+    const result = await UserServices.updateMyProfile(user, req);
     res.status(200).json({
       success: true,
       message: "My profile updated successfully",
