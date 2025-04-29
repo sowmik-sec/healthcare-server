@@ -5,6 +5,7 @@ import { userFilterableFields } from "./user.constant";
 import { UserServices } from "./user.service";
 import { StatusCodes } from "http-status-codes";
 import sendResponse from "../../../shared/sendResponse";
+import { TAuthUser } from "../../interfaces/common";
 
 const createAdmin = async (req: Request, res: Response) => {
   try {
@@ -91,10 +92,13 @@ const changeProfileStatus = async (req: Request, res: Response) => {
   }
 };
 
-const getMyProfile = async (req: Request, res: Response) => {
+const getMyProfile = async (
+  req: Request & { user?: TAuthUser },
+  res: Response
+) => {
   try {
     const user = req.user;
-    const result = await UserServices.getMyProfile(user);
+    const result = await UserServices.getMyProfile(user as TAuthUser);
     res.status(200).json({
       success: true,
       message: "My profile retrieved successfully",
@@ -107,10 +111,13 @@ const getMyProfile = async (req: Request, res: Response) => {
     });
   }
 };
-const updateMyProfile = async (req: Request, res: Response) => {
+const updateMyProfile = async (
+  req: Request & { user?: TAuthUser },
+  res: Response
+) => {
   try {
     const user = req.user;
-    const result = await UserServices.updateMyProfile(user, req);
+    const result = await UserServices.updateMyProfile(user as TAuthUser, req);
     res.status(200).json({
       success: true,
       message: "My profile updated successfully",

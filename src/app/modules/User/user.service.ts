@@ -15,6 +15,7 @@ import { TPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginationHelper";
 import { adminSearchableFields } from "../Admin/admin.constants";
 import { userSearchableFields } from "./user.constant";
+import { TAuthUser } from "../../interfaces/common";
 
 const createAdmin = async (req: Request): Promise<Admin> => {
   const file = req.file as IFile;
@@ -184,10 +185,10 @@ const changeProfileStatusIntoDB = async (id: string, status: UserRole) => {
   return updateUserStatus;
 };
 
-const getMyProfile = async (user) => {
+const getMyProfile = async (user: TAuthUser) => {
   const userInfo = await prisma.user.findUniqueOrThrow({
     where: {
-      email: user.email,
+      email: user?.email,
       status: UserStatus.ACTIVE,
     },
     select: {
@@ -227,10 +228,10 @@ const getMyProfile = async (user) => {
   return { ...userInfo, ...profileInfo };
 };
 
-const updateMyProfile = async (user, req: Request) => {
+const updateMyProfile = async (user: TAuthUser, req: Request) => {
   const userInfo = await prisma.user.findUniqueOrThrow({
     where: {
-      email: user.email,
+      email: user?.email,
       status: UserStatus.ACTIVE,
     },
   });
