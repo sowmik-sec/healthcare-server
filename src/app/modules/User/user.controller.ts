@@ -107,6 +107,22 @@ const getMyProfile = async (req: Request, res: Response) => {
     });
   }
 };
+const updateMyProfile = async (req: Request, res: Response) => {
+  try {
+    const user = req.user;
+    const result = await UserServices.updateMyProfile(user, req.body);
+    res.status(200).json({
+      success: true,
+      message: "My profile updated successfully",
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.name || "Something went wrong",
+    });
+  }
+};
 
 export const UserControllers = {
   createAdmin,
@@ -115,4 +131,5 @@ export const UserControllers = {
   getAllAdmins,
   changeProfileStatus,
   getMyProfile,
+  updateMyProfile,
 };
