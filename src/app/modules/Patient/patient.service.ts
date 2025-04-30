@@ -61,3 +61,4 @@ const updatePatientIntoDB = async (
 export const PatientServices = {
   updatePatientIntoDB,
 };
+//...
