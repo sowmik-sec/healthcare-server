@@ -11,4 +11,6 @@ router.post(
   ScheduleControllers.insertIntoDB
 );
 
+router.get("/", ScheduleControllers.getAllFromDB);
+
 export const ScheduleRoutes = router;
