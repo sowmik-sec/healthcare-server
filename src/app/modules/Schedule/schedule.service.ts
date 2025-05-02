@@ -1,7 +1,8 @@
-import { addHours, format } from "date-fns";
+import { addHours, addMinutes, format } from "date-fns";
 
 const insertIntoDB = async (payload: any) => {
   const { startDate, endDate, startTime, endTime } = payload;
+  const intervalTime = 30;
   const currentDate = new Date(startDate);
   const lastDate = new Date(endDate);
   while (currentDate <= endDate) {
@@ -13,11 +14,16 @@ const insertIntoDB = async (payload: any) => {
     );
     const endDatetime = new Date(
       addHours(
-        `${format(lastDate, "yyyy-MM-dd")}`,
+        `${format(currentDate, "yyyy-MM-dd")}`,
         Number(endTime.split(":")[0])
       )
     );
-    while (startDatetime <= endDatetime) {}
+    while (startDatetime < endDatetime) {
+      const scheduleData = {
+        startDatetime,
+        endDatetime: addMinutes(startDatetime, intervalTime),
+      };
+    }
   }
 };
 
