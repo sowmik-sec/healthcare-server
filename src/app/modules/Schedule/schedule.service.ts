@@ -5,6 +5,7 @@ import { ISchedule } from "./schedule.interface";
 import { IPatientFilterRequest } from "../Patient/patient.interface";
 import { TPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginationHelper";
+import { TAuthUser } from "../../interfaces/common";
 
 const convertDateTime = async (date: Date) => {
   const offset = date.getTimezoneOffset() * 60000;
@@ -70,11 +71,32 @@ const insertIntoDB = async (payload: ISchedule): Promise<Schedule[]> => {
   return schedules;
 };
 
-const getAllFromDB = async (filters: any, options: TPaginationOptions) => {
+const getAllFromDB = async (
+  filters: any,
+  options: TPaginationOptions,
+  user: TAuthUser
+) => {
   const { limit, page, skip } = paginationHelper.calculatePagination(options);
-  const { searchTerm, ...filterData } = filters;
+  const { startDate, endDate, ...filterData } = filters;
 
   const andConditions = [];
+
+  if (startDate && endDate) {
+    andConditions.push({
+      AND: [
+        {
+          startDateTime: {
+            gte: startDate,
+          },
+        },
+        {
+          endDateTime: {
+            lte: endDate,
+          },
+        },
+      ],
+    });
+  }
 
   if (Object.keys(filterData).length > 0) {
     andConditions.push({
@@ -90,6 +112,15 @@ const getAllFromDB = async (filters: any, options: TPaginationOptions) => {
 
   const whereConditions: Prisma.ScheduleWhereInput =
     andConditions.length > 0 ? { AND: andConditions } : {};
+
+  const doctorSchedules = await prisma.doctorSchedules.findMany({
+    where: {
+      doctor: {
+        email: user?.email,
+      },
+    },
+  });
+  console.log(doctorSchedules);
 
   const result = await prisma.schedule.findMany({
     where: whereConditions,
