@@ -1,13 +1,14 @@
 import { addHours, addMinutes, format } from "date-fns";
 import prisma from "../../../shared/prisma";
 import { Schedule } from "../../../generated/prisma";
+import { ISchedule } from "./schedule.interface";
 
 const convertDateTime = async (date: Date) => {
   const offset = date.getTimezoneOffset() * 60000;
   return new Date(date.getTime() + offset);
 };
 
-const insertIntoDB = async (payload: any): Promise<Schedule[]> => {
+const insertIntoDB = async (payload: ISchedule): Promise<Schedule[]> => {
   const { startDate, endDate, startTime, endTime } = payload;
   const intervalTime = 30;
   const schedules = [];
