@@ -9,7 +9,10 @@ import { TAuthUser } from "../../interfaces/common";
 const insertIntoDB = catchAsync(
   async (req: Request & { user?: TAuthUser }, res: Response) => {
     const user = req.user;
-    const result = await DoctorScheduleServices.insertIntoDB(user!, req.body);
+    const result = await DoctorScheduleServices.insertIntoDB(
+      user as TAuthUser,
+      req.body
+    );
 
     sendResponse(res, {
       statusCode: StatusCodes.OK,
@@ -41,8 +44,25 @@ const getMySchedule = catchAsync(
     });
   }
 );
+const deleteFromDB = catchAsync(
+  async (req: Request & { user?: TAuthUser }, res: Response) => {
+    const user = req.user;
+    const result = await DoctorScheduleServices.deleteFromDB(
+      user as TAuthUser,
+      req.params.id
+    );
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Doctor schedule deleted successfully",
+      data: result,
+    });
+  }
+);
 
 export const DoctorScheduleControllers = {
   insertIntoDB,
   getMySchedule,
+  deleteFromDB,
 };
