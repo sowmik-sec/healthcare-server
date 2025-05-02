@@ -20,6 +20,29 @@ const insertIntoDB = catchAsync(
   }
 );
 
+const getMySchedule = catchAsync(
+  async (req: Request & { user?: TAuthUser }, res: Response) => {
+    const filters = pick(req.query, ["startDate", "endDate", "isBooked"]);
+    const options = pick(req.query, ["limit", "page", "sortBy", "sortOrder"]);
+
+    const user = req.user;
+
+    const result = await DoctorScheduleServices.getMySchedule(
+      filters,
+      options,
+      user as TAuthUser
+    );
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Schedule retrieved successfully",
+      data: result,
+    });
+  }
+);
+
 export const DoctorScheduleControllers = {
   insertIntoDB,
+  getMySchedule,
 };
