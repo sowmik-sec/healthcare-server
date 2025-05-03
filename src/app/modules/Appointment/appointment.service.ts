@@ -1,6 +1,9 @@
 import prisma from "../../../shared/prisma";
 import { TAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
+import { TPaginationOptions } from "../../interfaces/pagination";
+import { paginationHelper } from "../../../helpers/paginationHelper";
+import { Prisma } from "../../../generated/prisma";
 
 const createAppointment = async (user: TAuthUser, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
@@ -74,6 +77,53 @@ const createAppointment = async (user: TAuthUser, payload: any) => {
   return result;
 };
 
+const getMyAppointment = async (
+  user: TAuthUser,
+  filters: any,
+  options: TPaginationOptions
+) => {
+  const { limit, page, skip } = paginationHelper.calculatePagination(options);
+  const { ...filterData } = filters;
+  const andConditions: Prisma.AppointmentWhereInput[] = [];
+
+  if (Object.keys(filterData).length > 0) {
+    const filterConditions = Object.keys(filterData).map((key) => ({
+      [key]: {
+        equals: (filterData as any)[key],
+      },
+    }));
+    andConditions.push(...filterConditions);
+  }
+
+  const whereConditions: Prisma.AppointmentWhereInput =
+    andConditions.length > 0 ? { AND: andConditions } : {};
+  const result = await prisma.appointment.findMany({
+    where: whereConditions,
+    skip,
+    take: limit,
+    orderBy:
+      options.sortBy && options.sortOrder
+        ? { [options.sortBy]: options.sortOrder }
+        : { createdAt: "desc" },
+    include: {
+      doctor: true,
+      schedule: true,
+    },
+  });
+  const total = await prisma.appointment.count({
+    where: whereConditions,
+  });
+  return {
+    meta: {
+      total,
+      page,
+      limit,
+    },
+    data: result,
+  };
+};
+
 export const AppointmentServices = {
   createAppointment,
+  getMyAppointment,
 };
