@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "../../../config";
 import prisma from "../../../shared/prisma";
 import { SSLService } from "../SSL/ssl.service";
+import { PaymentStatus } from "../../../generated/prisma";
 const initPayment = async (appointmentId: string) => {
   const paymentData = await prisma.payment.findFirstOrThrow({
     where: {
@@ -35,9 +36,24 @@ const validatePayment = async (payload: any) => {
       message: "Invalid payment",
     };
   }
-  const response = await axios({
-    method: "get",
-    url: `${config.ssl.sslValidationApi}?val_id=${payload.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`,
+
+  const response = await SSLService.validatePayment(payload);
+  if (response?.status !== "VALID") {
+    return {
+      message: "Payment failed",
+    };
+  }
+
+  await prisma.$transaction(async (tx) => {
+    await tx.payment.updateMany({
+      where: {
+        transactionId: response.tran_id,
+      },
+      data: {
+        status: PaymentStatus.PAID,
+        paymentGatewayData: response,
+      },
+    });
   });
 };
 
