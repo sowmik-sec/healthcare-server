@@ -17,16 +17,31 @@ const createReviewIntoDB = async (user: TAuthUser, payload: any) => {
   if (patientData.id !== appointmentData.patientId) {
     throw new ApiError(StatusCodes.BAD_REQUEST, "This is not your appointment");
   }
-  const result = await prisma.review.create({
-    data: {
-      appointmentId: appointmentData.id,
-      doctorId: appointmentData.doctorId,
-      patientId: appointmentData.patientId,
-      rating: payload.rating,
-      comment: payload.comment,
-    },
+  return await prisma.$transaction(async (tx) => {
+    const result = await prisma.review.create({
+      data: {
+        appointmentId: appointmentData.id,
+        doctorId: appointmentData.doctorId,
+        patientId: appointmentData.patientId,
+        rating: payload.rating,
+        comment: payload.comment,
+      },
+    });
+    const avgRating = await tx.review.aggregate({
+      _avg: {
+        rating: true,
+      },
+    });
+    await tx.doctor.update({
+      where: {
+        id: appointmentData.doctorId,
+      },
+      data: {
+        averageRating: avgRating._avg.rating as number,
+      },
+    });
+    return result;
   });
-  return result;
 };
 
 export const ReviewServices = {
