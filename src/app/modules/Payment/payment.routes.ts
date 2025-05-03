@@ -5,6 +5,8 @@ import { UserRole } from "../../../generated/prisma";
 
 const router = express.Router();
 
+router.get("/ipn", auth(UserRole.PATIENT), PaymentControllers.validatePayment);
+
 router.post(
   "/init-payment/:appointmentId",
   auth(UserRole.PATIENT),

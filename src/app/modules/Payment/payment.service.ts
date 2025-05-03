@@ -29,6 +29,19 @@ const initPayment = async (appointmentId: string) => {
   };
 };
 
+const validatePayment = async (payload: any) => {
+  if (!payload || !payload.status || !(payload.status === "VALID")) {
+    return {
+      message: "Invalid payment",
+    };
+  }
+  const response = await axios({
+    method: "get",
+    url: `${config.ssl.sslValidationApi}?val_id=${payload.val_id}&store_id=${config.ssl.storeId}&store_passwd=${config.ssl.storePass}&format=json`,
+  });
+};
+
 export const PaymentServices = {
   initPayment,
+  validatePayment,
 };
