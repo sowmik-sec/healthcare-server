@@ -3,7 +3,12 @@ import { TAuthUser } from "../../interfaces/common";
 import { v4 as uuidv4 } from "uuid";
 import { TPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginationHelper";
-import { AppointmentStatus, Prisma, UserRole } from "../../../generated/prisma";
+import {
+  AppointmentStatus,
+  PaymentStatus,
+  Prisma,
+  UserRole,
+} from "../../../generated/prisma";
 import ApiError from "../../errors/ApiError";
 import { StatusCodes } from "http-status-codes";
 
@@ -178,8 +183,26 @@ const changeAppointmentStatus = async (
   return result;
 };
 
+const cancelUnpaidAppointments = async () => {
+  const thirtyMinuteAgo = new Date(Date.now() - 30 * 60 * 1000);
+  const unpaidAppointments = await prisma.appointment.findMany({
+    where: {
+      createdAt: {
+        lte: thirtyMinuteAgo,
+      },
+      paymentStatus: PaymentStatus.UNPAID,
+    },
+  });
+  const appointmentIdsToCancel = unpaidAppointments.map(
+    (appointment) => appointment.id
+  );
+
+  console.log(appointmentIdsToCancel);
+};
+
 export const AppointmentServices = {
   createAppointment,
   getMyAppointment,
   changeAppointmentStatus,
+  cancelUnpaidAppointments,
 };
