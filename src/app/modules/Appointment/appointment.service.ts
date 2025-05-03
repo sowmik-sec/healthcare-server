@@ -212,16 +212,17 @@ const cancelUnpaidAppointments = async () => {
         },
       },
     });
-    await tx.doctorSchedules.updateMany({
-      where: {
-        appointmentId: {
-          in: appointmentIdsToCancel,
+    for (const unpaidAppointment of unpaidAppointments) {
+      await tx.doctorSchedules.updateMany({
+        where: {
+          doctorId: unpaidAppointment.doctorId,
+          scheduleId: unpaidAppointment.scheduleId,
         },
-      },
-      data: {
-        isBooked: false,
-      },
-    });
+        data: {
+          isBooked: false,
+        },
+      });
+    }
   });
 };
 

@@ -6,13 +6,18 @@ import { StatusCodes } from "http-status-codes";
 import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 import { AppointmentServices } from "./app/modules/Appointment/appointment.service";
 const app: Application = express();
+import corn from "node-cron";
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-AppointmentServices.cancelUnpaidAppointments();
+corn.schedule("* * * * *", () => {
+  try {
+    AppointmentServices.cancelUnpaidAppointments();
+  } catch (error) {}
+});
 
 app.get("/", (req: Request, res: Response) => {
   res.send({
