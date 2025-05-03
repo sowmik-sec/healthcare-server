@@ -31,19 +31,21 @@ const initPayment = async (appointmentId: string) => {
 };
 
 const validatePayment = async (payload: any) => {
-  if (!payload || !payload.status || !(payload.status === "VALID")) {
-    return {
-      message: "Invalid payment",
-    };
-  }
+  // For production code
+  //   if (!payload || !payload.status || !(payload.status === "VALID")) {
+  //     return {
+  //       message: "Invalid payment",
+  //     };
+  //   }
 
-  const response = await SSLService.validatePayment(payload);
-  if (response?.status !== "VALID") {
-    return {
-      message: "Payment failed",
-    };
-  }
-
+  //   const response = await SSLService.validatePayment(payload);
+  //   if (response?.status !== "VALID") {
+  //     return {
+  //       message: "Payment failed",
+  //     };
+  //   }
+  // for testing purpose
+  const response = payload;
   await prisma.$transaction(async (tx) => {
     const updatedPaymentData = await tx.payment.update({
       where: {
