@@ -4,6 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 import { TPaginationOptions } from "../../interfaces/pagination";
 import { paginationHelper } from "../../../helpers/paginationHelper";
 import { AppointmentStatus, Prisma, UserRole } from "../../../generated/prisma";
+import ApiError from "../../errors/ApiError";
+import { StatusCodes } from "http-status-codes";
 
 const createAppointment = async (user: TAuthUser, payload: any) => {
   const patientData = await prisma.patient.findUniqueOrThrow({
@@ -144,13 +146,27 @@ const getMyAppointment = async (
 
 const changeAppointmentStatus = async (
   appointmentId: string,
-  status: AppointmentStatus
+  status: AppointmentStatus,
+  user: TAuthUser
 ) => {
   const appointmentData = await prisma.appointment.findUniqueOrThrow({
     where: {
       id: appointmentId,
     },
+    include: {
+      doctor: true,
+    },
   });
+
+  if (user?.role === UserRole.DOCTOR) {
+    if (!(user.email === appointmentData.doctor.email)) {
+      throw new ApiError(
+        StatusCodes.BAD_REQUEST,
+        "This is not your appointment"
+      );
+    }
+  }
+
   const result = await prisma.appointment.update({
     where: {
       id: appointmentId,

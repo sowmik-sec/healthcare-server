@@ -46,7 +46,8 @@ const changeAppointmentStatus = catchAsync(
     const { status } = req.body;
     const result = await AppointmentServices.changeAppointmentStatus(
       req.params.id,
-      status
+      status,
+      user as TAuthUser
     );
     sendResponse(res, {
       statusCode: StatusCodes.OK,
