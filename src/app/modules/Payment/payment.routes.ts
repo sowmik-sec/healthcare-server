@@ -6,7 +6,7 @@ import { UserRole } from "../../../generated/prisma";
 const router = express.Router();
 
 router.post(
-  "/init-payment",
+  "/init-payment/:appointmentId",
   auth(UserRole.PATIENT),
   PaymentControllers.initPayment
 );
