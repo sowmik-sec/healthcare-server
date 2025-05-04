@@ -47,6 +47,33 @@ const getDoctorMetaData = async (user: TAuthUser) => {
   const patientCount = await prisma.appointment.groupBy({
     by: ["patientId"],
   });
+  const reviewCount = await prisma.review.count({
+    where: {
+      doctorId: doctorData.id,
+    },
+  });
+  const totalRevenue = await prisma.payment.aggregate({
+    _sum: { amount: true },
+    where: {
+      appointment: {
+        doctorId: doctorData.id,
+      },
+    },
+  });
+  const appointmentStatusDistribution = await prisma.appointment.groupBy({
+    by: ["status"],
+    _count: {
+      id: true,
+    },
+    where: {
+      doctorId: doctorData.id,
+    },
+  });
+  const formattedAppointmentStatusDistribution =
+    appointmentStatusDistribution.map(({ status, _count }) => ({
+      status: status,
+      count: Number(_count.id),
+    }));
 };
 const getPatientMetaData = async () => {};
 
